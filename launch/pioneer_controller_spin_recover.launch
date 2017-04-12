@@ -4,5 +4,5 @@
     <rosparam file="$(find pioneer_test)/pioneer_controller_params.yaml" command="load"/>
     <remap from="/RosAria/cmd_vel" to="controller_cmd_vel"/>
   </node>
-  <node pkg="pioneer_test" type="turn_robot_around.py" name="turn_robot_around"/>
+  <node pkg="pioneer_ros" type="move_base_recover" name="move_base_recover" output="screen"/>
 </launch>

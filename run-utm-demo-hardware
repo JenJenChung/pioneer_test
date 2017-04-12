@@ -3,7 +3,7 @@
 my_pid=$$
 echo "My process ID is $my_pid"
 
-export ROBOT_NAME="pioneer2"
+export ROBOT_NAME="pioneer"
 
 #echo "Launching roscore..."
 #roscore &
@@ -23,7 +23,7 @@ sleep 3s
 
 echo "Launching map server..."
 sleep 5s
-roslaunch nav_bundle map_server_utm_demo.launch map_name:=utm_hardware_demo5 &
+roslaunch nav_bundle map_server_utm_demo.launch map_name:=utm_hardware_demo6 &
 pid="$pid $!"
 
 echo "Loading robot parameters..."
