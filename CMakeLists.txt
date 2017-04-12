@@ -49,6 +49,10 @@ add_executable(pioneer3dx_pid_controller src/pioneer3dx_pid_controller.cpp)
 target_link_libraries(pioneer3dx_pid_controller ${catkin_LIBRARIES})
 add_dependencies(pioneer3dx_pid_controller ${catkin_EXPORTED_TARGETS})
 
+add_executable(pioneer3dx_move_base_recover src/move_base_recover.cpp)
+target_link_libraries(pioneer3dx_move_base_recover ${catkin_LIBRARIES})
+add_dependencies(pioneer3dx_move_base_recover ${catkin_EXPORTED_TARGETS})
+
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
