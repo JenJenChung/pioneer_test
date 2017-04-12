@@ -3,7 +3,7 @@
 my_pid=$$
 echo "My process ID is $my_pid"
 
-export ROBOT_NAME="pioneer"
+export ROBOT_NAME="pioneer1"
 
 namespace=($ROBOT_NAME)
 #echo "Launching roscore..."
@@ -17,7 +17,7 @@ namespace=($ROBOT_NAME)
 #sleep 3s
 
 echo "Launching sensors..."
-roslaunch pioneer_test pioneer_sensors.launch robot_name:=${namespace[0]} &
+roslaunch pioneer_test multi_pioneer_sensors.launch robot_name:=${namespace[0]} &
 pid="$! $pid"
 
 sleep 3s

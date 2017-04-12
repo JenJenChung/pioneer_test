@@ -29,7 +29,7 @@ pid="$! $pid"
 sleep 3s
 
 echo "Launching rviz..."
-rosrun rviz rviz -d "$(rospack find pioneer_test)/pioneer_test_frontier_rviz_config.rviz" &
+rosrun rviz rviz -d "$(rospack find pioneer_test)/pioneer_test_desktop_demo.rviz" &
 pid="$! $pid"
 
 sleep 1s
