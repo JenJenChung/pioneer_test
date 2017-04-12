@@ -20,11 +20,12 @@ class OdomToMap{
 OdomToMap::OdomToMap(ros::NodeHandle nh){
   subOdom = nh.subscribe("odom", 10, &OdomToMap::odomCallback, this) ;
   pubOdomMap = nh.advertise<nav_msgs::Odometry>("odom_map", 10) ;
+  listener.waitForTransform("/map", "odom", ros::Time(0), ros::Duration(3));
   try{
       listener.lookupTransform("/map", "odom", ros::Time(0), transform) ;
     }
   catch (tf::TransformException &ex){
-    ROS_ERROR("%s", ex.what()) ;
+    ROS_ERROR("ToMap failed: %s", ex.what()) ;
     ros::Duration(1.0).sleep() ;
   }
 }
@@ -37,7 +38,7 @@ void OdomToMap::odomCallback(const nav_msgs::Odometry& msg)
       listener.lookupTransform("/map", "odom", ros::Time(0), transform) ;
     }
     catch (tf::TransformException &ex){
-      ROS_ERROR("%s", ex.what()) ;
+      ROS_ERROR("Callback failed: %s", ex.what()) ;
       ros::Duration(1.0).sleep() ;
       continue ;
     }

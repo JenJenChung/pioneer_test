@@ -5,6 +5,7 @@ echo "My process ID is $my_pid"
 
 export ROBOT_NAME="pioneer"
 
+namespace=($ROBOT_NAME)
 #echo "Launching roscore..."
 #roscore &
 #pid=$!
@@ -16,10 +17,14 @@ export ROBOT_NAME="pioneer"
 #sleep 3s
 
 echo "Launching sensors..."
-roslaunch pioneer_test pioneer_sensors.launch &
+roslaunch pioneer_test pioneer_sensors.launch robot_name:=${namespace[0]} &
 pid="$! $pid"
 
 sleep 3s
+
+roslaunch pioneer_test pioneer_laser_filter.launch robot_name:=${namespace[0]} &
+pid="$! $pid"
+
 
 echo "Launching map server..."
 sleep 5s
@@ -30,7 +35,6 @@ echo "Loading robot parameters..."
 roslaunch pioneer_test utm_traffic_description.launch
 
 echo "Launching robot navigation packages..."
-namespace=($ROBOT_NAME)
 roslaunch nav_bundle single_navigation_utm_traffic_demo.launch robot_name:=${namespace[0]} x:="$(rosparam get /${namespace[0]}/x)" y:="$(rosparam get /${namespace[0]}/y)" yaw:="$(rosparam get /${namespace[0]}/a)" &
 pid=$!
 
