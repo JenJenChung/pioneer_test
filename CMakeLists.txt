@@ -37,6 +37,10 @@ add_executable(laser_tf_broadcaster src/laser_tf_broadcaster.cpp)
 target_link_libraries(laser_tf_broadcaster ${catkin_LIBRARIES})
 add_dependencies(laser_tf_broadcaster ${catkin_EXPORTED_TARGETS})
 
+add_executable(rp_laser_tf_broadcaster src/rp_laser_tf_broadcaster.cpp)
+target_link_libraries(rp_laser_tf_broadcaster ${catkin_LIBRARIES})
+add_dependencies(rp_laser_tf_broadcaster ${catkin_EXPORTED_TARGETS})
+
 add_executable(rplidar_laser_publisher src/rplidar_laser_publisher.cpp)
 target_link_libraries(rplidar_laser_publisher ${catkin_LIBRARIES})
 add_dependencies(rplidar_laser_publisher ${catkin_EXPORTED_TARGETS})
