@@ -45,10 +45,6 @@ add_executable(rplidar_laser_publisher src/rplidar_laser_publisher.cpp)
 target_link_libraries(rplidar_laser_publisher ${catkin_LIBRARIES})
 add_dependencies(rplidar_laser_publisher ${catkin_EXPORTED_TARGETS})
 
-add_executable(rplidar_laser_republisher src/rplidar_laser_republisher.cpp)
-target_link_libraries(rplidar_laser_republisher ${catkin_LIBRARIES})
-add_dependencies(rplidar_laser_republisher ${catkin_EXPORTED_TARGETS})
-
 add_executable(pioneer3dx_pid_controller src/pioneer3dx_pid_controller.cpp)
 target_link_libraries(pioneer3dx_pid_controller ${catkin_LIBRARIES})
 add_dependencies(pioneer3dx_pid_controller ${catkin_EXPORTED_TARGETS})
