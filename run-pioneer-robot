@@ -6,7 +6,7 @@ pid=$!
 sleep 5s
 
 echo "Connecting to RosAria..."
-rosrun rosaria RosAria port:="/dev/pioneer"&
+rosrun rosaria RosAria _port:="/dev/pioneer" &
 pid="$! $pid"
 sleep 3s
 
