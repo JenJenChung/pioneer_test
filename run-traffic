@@ -1,0 +1,70 @@
+#!/bin/bash
+
+export ROBOT_NAME="pioneer1"
+
+echo "Launching roscore..."
+roscore &
+pid=$!
+sleep 5s
+
+echo "Connecting to RosAria..."
+rosrun rosaria RosAria & #_port:="/dev/pioneer" &
+pid="$! $pid"
+sleep 3s
+
+echo "Launching sensors..."
+roslaunch pioneer_test pioneer_sensors.launch &
+pid="$! $pid"
+
+sleep 3s
+
+echo "Launching urdf description..."
+roslaunch pioneer_test pioneer_description.launch &
+sleep 3s
+
+# Loads the map (different to map_server.launch in that it DOES NOT set use_sim_time to true)
+echo "Launching map server..."
+sleep 5s
+roslaunch nav_bundle map_server_utm_demo.launch map_name:=utm_hardware_demo8 &
+pid="$pid $!"
+
+echo "Launching navigation stack..."
+roslaunch nav_bundle nav_bundle_localisation.launch &
+pid="$! $pid"
+
+sleep 3s
+
+
+echo "Launching pioneer controller..."
+roslaunch pioneer_test pioneer_controller_utm_traffic.launch &
+pid="$! $pid"
+
+sleep 3s
+
+echo "Launching traffic handling node..."
+rosparam load $(rospack find utm_traffic)/launch/utm_agent_demo8_params.yaml
+roslaunch utm_traffic pioneer_traffic_demo8.launch robot_name:=$ROBOT_NAME &
+pid="$! $pid"
+
+sleep 3s
+
+echo "Launching pioneer delivery node..."
+roslaunch pioneer_delivery delivery_waypoint_demo.launch waypoint_file:="waypoints_demo8" &
+pid="$! $pid"
+
+sleep 3s
+
+echo "Launching rviz..."
+rosrun rviz rviz -d "$(rospack find pioneer_test)/pioneer_test_desktop_demo.rviz" &
+pid="$! $pid"
+
+sleep 1s
+
+#echo "Launching estop..."
+#rqt --standalone rqt_estop
+
+sleep 1s
+
+trap "echo Killing all processes.; kill -2 $pid; exit" SIGINT SIGTERM
+
+sleep 24h
