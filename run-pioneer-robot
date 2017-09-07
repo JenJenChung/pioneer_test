@@ -6,7 +6,7 @@ pid=$!
 sleep 5s
 
 echo "Connecting to RosAria..."
-rosrun rosaria RosAria &
+rosrun rosaria RosAria _port:="/dev/pioneer" &
 pid="$! $pid"
 sleep 3s
 
@@ -14,6 +14,10 @@ echo "Launching sensors..."
 roslaunch pioneer_test pioneer_sensors.launch &
 pid="$! $pid"
 
+sleep 3s
+
+echo "Launching urdf description..."
+roslaunch pioneer_test pioneer_description.launch &
 sleep 3s
 
 echo "Launching navigation stack..."
@@ -29,7 +33,6 @@ pid="$! $pid"
 sleep 3s
 
 echo "Launching rviz..."
-roslaunch pioneer_test pioneer_description.launch &
 rosrun rviz rviz -d "$(rospack find pioneer_test)/pioneer_test_desktop_demo.rviz" &
 pid="$! $pid"
 
