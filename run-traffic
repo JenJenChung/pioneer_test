@@ -29,7 +29,7 @@ roslaunch nav_bundle map_server_utm_demo.launch map_name:=utm_hardware_demo8 &
 pid="$pid $!"
 
 echo "Launching navigation stack..."
-roslaunch nav_bundle nav_bundle_localisation.launch &
+roslaunch nav_bundle nav_bundle_localisation.launch x:="$(rosparam get /$ROBOT_NAME/x)" y:="$(rosparam get /$ROBOT_NAME/y)" yaw:="$(rosparam get /$ROBOT_NAME/a)" &
 pid="$! $pid"
 
 sleep 3s
