@@ -18,7 +18,8 @@ pid="$! $pid"
 
 sleep 3s
 
-echo "Launching urdf description..."
+echo "Launching urdf description and initialisation parameters..."
+rosparam load $(rospack find pioneer_description)/launch/pioneer_utm_traffic_demo8.yaml
 roslaunch pioneer_test pioneer_description.launch &
 sleep 3s
 
