@@ -15,8 +15,9 @@
   ./catkin_ws/src/pioneer_test/run-traffic
 
 # Open new terminal from the gateway terminal (ctrl + shift + t)
-  rosrun rocon_flip traffic-flip-to-hub-utm
-  rosrun rocon_flip traffic-pull-from-hub-utm
+  export ROBOT_NAME="pioneer1" # set correct number
+  ./catkin_ws/src/rocon_flip/scripts/traffic-flip-to-hub-utm
+  ./catkin_ws/src/rocon_flip/scripts/traffic-pull-from-hub-utm
   
 # Open new terminal from the gateway terminal (ctrl + shift + t)
   rostopic pub -1 /cmd_map_goal geometry_msgs/Twist '[0, 0, 0]' '[0, 0, 0]' (an appropriate waypoint)
@@ -25,4 +26,4 @@
   ./catkin_ws/src/utm_agents/run-utm
   
 # Open new terminal from the gateway terminal (ctrl + shift + t)
-  rosrun rocon_flip utm-advertise-from-hub
+  ./catkin_ws/src/rocon_flip/scripts/utm-advertise-from-hub
