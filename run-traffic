@@ -2,15 +2,15 @@
 
 export ROBOT_NAME="pioneer1"
 
-echo "Launching roscore..."
-roscore &
-pid=$!
-sleep 5s
+#echo "Launching roscore..."
+#roscore &
+#pid=$!
+#sleep 5s
 
-echo "Connecting to RosAria..."
-rosrun rosaria RosAria & #_port:="/dev/pioneer" &
-pid="$! $pid"
-sleep 3s
+#echo "Connecting to RosAria..."
+#rosrun rosaria RosAria & #_port:="/dev/pioneer" &
+#pid="$! $pid"
+#sleep 3s
 
 echo "Launching sensors..."
 roslaunch pioneer_test pioneer_sensors.launch &
