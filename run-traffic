@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export ROBOT_NAME="pioneer1"
+#export ROBOT_NAME="pioneer1"
 
 #echo "Launching roscore..."
 #roscore &
@@ -35,6 +35,11 @@ pid="$! $pid"
 
 sleep 3s
 
+echo "Publishing position in map frame..."
+roslaunch pioneer_test odom_to_map.launch &
+pid="$! $pid"
+
+sleep 3s
 
 echo "Launching pioneer controller..."
 roslaunch pioneer_test pioneer_controller_utm_traffic.launch &
